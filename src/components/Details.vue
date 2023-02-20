@@ -1,0 +1,42 @@
+<template>
+  <div>
+    <div class="pl-40 pt-2">
+      <router-link to="/products" class="border border-black">กลับ</router-link>
+    </div>
+  <div class="grid grid-cols-2 sm:px-40 pt-2">
+    <div class="h-full w-full">
+      <img :src='products.thumbnail'>
+    </div>
+    <div class="bg-blue-200 p-3 text-xl rounded-lg">
+      <h1>ชื่อสินค้า : {{ products.title }} </h1>
+      <h1>ราคา : {{ products.price }} บาท</h1>
+      <h1>รายละเอียด : {{ products.description }} </h1>
+      <h1>จํานวนสินค้าที่เหลือ : {{ products.stock }} ชิ้น</h1>
+    </div>
+  </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'MyDetails',
+  props: ['id'],
+  data () {
+    return {
+      // id: this.$route.params.id,
+      products: {}
+    }
+  },
+  async created () {
+    try {
+      const response = await axios.get('https://dummyjson.com/products/' + this.$route.params.id)
+      this.products = response.data
+      console.log(this.products, 'products')
+    } catch (error) {
+      this.products = false
+      console.log(error, 'error')
+    }
+  }
+}
+</script>

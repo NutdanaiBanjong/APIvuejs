@@ -30,7 +30,7 @@ export default {
   },
   async created () {
     try {
-      const response = await axios.get('https://dummyjson.com/products/' + this.$route.params.id)
+      const response = await axios.get('https://dummyjson.com/products/' + this.id)
       this.products = response.data
       console.log(this.products, 'products')
     } catch (error) {
